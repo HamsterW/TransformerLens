@@ -19,6 +19,7 @@ from transformers import (
     AutoModelForCausalLM,
     BertForPreTraining,
     T5ForConditionalGeneration,
+    AutoModel
 )
 
 import transformer_lens.utils as utils
@@ -44,6 +45,7 @@ from transformer_lens.pretrained.weight_conversions import (
     convert_qwen3_weights,
     convert_qwen_weights,
     convert_t5_weights,
+    convert_llada_weights,
 )
 
 OFFICIAL_MODEL_NAMES = [
@@ -263,6 +265,7 @@ OFFICIAL_MODEL_NAMES = [
     "google-t5/t5-base",
     "google-t5/t5-large",
     "ai-forever/mGPT",
+    "GSAI-ML/LLaDA-8B-Base",
 ]
 """Official model names for models on HuggingFace."""
 
@@ -719,6 +722,7 @@ MODEL_ALIASES = {
     "google-t5/t5-base": ["t5-base"],
     "google-t5/t5-large": ["t5-large"],
     "ai-forever/mGPT": ["mGPT"],
+    "GSAI-ML/LLaDA-8B-Base": ["llada-8b"],
 }
 """Model aliases for models on HuggingFace."""
 
@@ -1084,6 +1088,27 @@ def convert_hf_model_config(model_name: str, **kwargs: Any):
             "NTK_by_parts_high_freq_factor": 4.0,
             "NTK_by_parts_factor": 8.0,
             "NTK_original_ctx_len": 8192,
+        }
+    elif "LLaDA-8B" in official_model_name:
+        cfg_dict = {
+            "d_model": 4096,
+            "d_head": 128,
+            "n_heads": 32,
+            "d_mlp": 12288,
+            "n_layers": 32,
+            "n_ctx": 8192,
+            "eps": 1e-5,
+            "d_vocab": 126464,
+            "act_fn": "silu",
+            "n_key_value_heads": 8,
+            "normalization_type": "RMS",
+            "positional_embedding_type": "rotary",
+            "rotary_adjacent_pairs": False,
+            "rotary_dim": 128,
+            "final_rms": True,
+            "gated_mlp": True,
+            "rotary_base": 500000.0,
+            "attention_dir": "bidirectional",
         }
     elif architecture == "GPTNeoForCausalLM":
         cfg_dict = {
@@ -1935,6 +1960,13 @@ def get_pretrained_state_dict(
                     token=huggingface_token if len(huggingface_token) > 0 else None,
                     **kwargs,
                 )
+            elif "LLaDA" in official_model_name:
+                hf_model = AutoModel.from_pretrained(
+                    official_model_name,
+                    torch_dtype=dtype,
+                    token=huggingface_token if len(huggingface_token) > 0 else None,
+                    **kwargs,
+                )
             else:
                 hf_model = AutoModelForCausalLM.from_pretrained(
                     official_model_name,
@@ -1986,6 +2018,8 @@ def get_pretrained_state_dict(
             state_dict = convert_gemma_weights(hf_model, cfg)
         elif cfg.original_architecture == "Gemma2ForCausalLM":
             state_dict = convert_gemma_weights(hf_model, cfg)
+        elif cfg.original_architecture == "LLaDAModelLM":
+            state_dict = convert_llada_weights(hf_model, cfg)
         else:
             raise ValueError(
                 f"Loading weights from the architecture is not currently supported: {cfg.original_architecture}, generated from model name {cfg.model_name}. Feel free to open an issue on GitHub to request this feature."
