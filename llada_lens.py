@@ -30,11 +30,8 @@ device = t.device("cuda" if t.cuda.is_available() else "cpu")
 # gpt2_small: HookedTransformer = HookedTransformer.from_pretrained("gpt2-small")
 # print(gpt2_small.cfg)
 
-# tokenizer = AutoTokenizer.from_pretrained('GSAI-ML/LLaDA-8B-Base', trust_remote_code=True)
-# hf_llada = AutoModel.from_pretrained('GSAI-ML/LLaDA-8B-Base', trust_remote_code=True, torch_dtype=t.bfloat16)
-# print(hf_llada)
 tl_model = HookedTransformer.from_pretrained(
     'GSAI-ML/LLaDA-8B-Base', 
-    #tokenizer=tokenizer,
-    trust_remote_code=True
+    trust_remote_code=True,
+    n_devices=4
 )

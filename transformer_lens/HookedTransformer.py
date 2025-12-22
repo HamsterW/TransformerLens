@@ -1339,8 +1339,6 @@ class HookedTransformer(HookedRootModule):
             **from_pretrained_kwargs,
         )
 
-        print(cfg)
-
         if cfg.positional_embedding_type == "shortformer":
             if fold_ln:
                 logging.warning(
