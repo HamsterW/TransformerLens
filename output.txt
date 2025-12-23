@@ -1,8 +1,81 @@
 WARNING:root:float16 models may not work on CPU. Consider using a GPU or bfloat16.
-Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  2.83it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:01,  2.35it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:01<00:01,  2.16it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:01<00:00,  2.14it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:02<00:00,  2.17it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.37it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.30it/s]
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  4.06it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:01,  3.23it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:01<00:01,  2.85it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:01<00:00,  2.74it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:01<00:00,  2.69it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.94it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.93it/s]
+LLaDAModelLM(
+  (model): LLaDAModel(
+    (transformer): ModuleDict(
+      (wte): Embedding(126464, 4096)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): RMSLayerNorm()
+      (blocks): ModuleList(
+        (0-31): 32 x LLaDALlamaBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SiLU()
+          (attn_out): Linear(in_features=4096, out_features=4096, bias=False)
+          (ff_out): Linear(in_features=12288, out_features=4096, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (attn_norm): RMSLayerNorm()
+          (ff_norm): RMSLayerNorm()
+          (q_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (k_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (v_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (ff_proj): Linear(in_features=4096, out_features=12288, bias=False)
+          (up_proj): Linear(in_features=4096, out_features=12288, bias=False)
+        )
+      )
+      (ff_out): Linear(in_features=4096, out_features=126464, bias=False)
+    )
+  )
+)
 WARNING:root:With reduced precision, it is advised to use `from_pretrained_no_processing` instead of `from_pretrained`.
 WARNING:root:You are not using LayerNorm, so the writing weights can't be centered! Skipping
 Loaded pretrained model GSAI-ML/LLaDA-8B-Base into HookedTransformer
+HookedTransformer(
+  (embed): Embed()
+  (hook_embed): HookPoint()
+  (blocks): ModuleList(
+    (0-31): 32 x TransformerBlock(
+      (ln1): RMSNormPre(
+        (hook_scale): HookPoint()
+        (hook_normalized): HookPoint()
+      )
+      (ln2): RMSNormPre(
+        (hook_scale): HookPoint()
+        (hook_normalized): HookPoint()
+      )
+      (attn): Attention(
+        (hook_k): HookPoint()
+        (hook_q): HookPoint()
+        (hook_v): HookPoint()
+        (hook_z): HookPoint()
+        (hook_attn_scores): HookPoint()
+        (hook_pattern): HookPoint()
+        (hook_result): HookPoint()
+        (hook_rot_k): HookPoint()
+        (hook_rot_q): HookPoint()
+      )
+      (mlp): GatedMLP(
+        (hook_pre): HookPoint()
+        (hook_pre_linear): HookPoint()
+        (hook_post): HookPoint()
+      )
+      (hook_attn_in): HookPoint()
+      (hook_q_input): HookPoint()
+      (hook_k_input): HookPoint()
+      (hook_v_input): HookPoint()
+      (hook_mlp_in): HookPoint()
+      (hook_attn_out): HookPoint()
+      (hook_mlp_out): HookPoint()
+      (hook_resid_pre): HookPoint()
+      (hook_resid_mid): HookPoint()
+      (hook_resid_post): HookPoint()
+    )
+  )
+  (ln_final): RMSNormPre(
+    (hook_scale): HookPoint()
+    (hook_normalized): HookPoint()
+  )
+  (unembed): Unembed()
+)
 HookedTransformerConfig:
 {'NTK_by_parts_factor': 8.0,
  'NTK_by_parts_high_freq_factor': 4.0,
@@ -39,7 +112,7 @@ HookedTransformerConfig:
  'n_ctx': 8192,
  'n_devices': 1,
  'n_heads': 32,
- 'n_key_value_heads': 32,
+ 'n_key_value_heads': None,
  'n_layers': 32,
  'n_params': 6979321856,
  'normalization_type': 'RMSPre',
@@ -72,11 +145,7 @@ HookedTransformerConfig:
  'use_qk_norm': False,
  'use_split_qkv_input': False,
  'window_size': None}
-Starting Generation: 'The capital of France is' + 10 masks
-Step 0/50: <|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|>
-Step 10/50: <|mdm_mask|><|mdm_mask|><|mdm_mask|>,<|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|>,<|mdm_mask|>
-Step 20/50: ,<|mdm_mask|>,,<|mdm_mask|>,<|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|>
-Step 30/50: ,<|mdm_mask|>,,<|mdm_mask|>,<|mdm_mask|>,<|mdm_mask|> sums
-Step 40/50: ,<|mdm_mask|> set,,,,,<|mdm_mask|>,
+Starting Generation: 'The Capital of France is' + 10 masks
+Step 0/5: <|mdm_mask|> answer<|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|> it<|mdm_mask|>
 
-Final Output: <|startoftext|>The capital of France is,,,,,,,,,,
+Final Output: <|startoftext|>The Capital of France is Paris答案\n Yorkers right thought pronunciation to wrong,

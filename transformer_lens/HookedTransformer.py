@@ -1602,8 +1602,9 @@ class HookedTransformer(HookedRootModule):
             logging.warning(
                 "When running MoE models, it is advised to use a higher precision data type. See docs for more info."
             )
-
         state_dict = self.fill_missing_keys(state_dict)
+
+
         if fold_ln:
             if self.cfg.num_experts and self.cfg.num_experts > 1:
                 logging.warning(
