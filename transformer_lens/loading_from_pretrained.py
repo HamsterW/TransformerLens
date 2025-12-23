@@ -1100,7 +1100,7 @@ def convert_hf_model_config(model_name: str, **kwargs: Any):
             "eps": 1e-5,
             "d_vocab": 126464,
             "act_fn": "silu",
-            "n_key_value_heads": 8,
+            "n_key_value_heads": 32,
             "normalization_type": "RMS",
             "positional_embedding_type": "rotary",
             "rotary_adjacent_pairs": False,
