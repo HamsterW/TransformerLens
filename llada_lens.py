@@ -25,22 +25,20 @@ from transformer_lens import (
 from transformer_lens.hook_points import HookPoint
 from transformers import AutoModel, AutoTokenizer
 
-import plotly.express as px
-from transformer_lens.utils import to_numpy
-
 from llada_generate import generate
+
+MODEL = 'GSAI-ML/LLaDA-8B-Instruct'
+SHOW_STEPS = False
+SKIP_SPECIAL_TOKENS = False
 
 device = t.device("cuda" if t.cuda.is_available() else "cpu")
 
 tl_model = HookedTransformer.from_pretrained(
-    'GSAI-ML/LLaDA-8B-Instruct', 
+    MODEL, 
     trust_remote_code=True,
     n_devices=1,
     dtype="float16",
 )
-
-print(tl_model)
-print(tl_model.cfg)
 
 tokenizer = tl_model.tokenizer
 if tokenizer.padding_side != 'left':
@@ -64,8 +62,9 @@ encoded_outputs = tokenizer(
 input_ids = encoded_outputs['input_ids'].to(device)
 attention_mask = encoded_outputs['attention_mask'].to(device)
 
-out = generate(tl_model, input_ids, attention_mask, steps=128, gen_length=128, block_length=32, temperature=0., cfg_scale=0., remasking='low_confidence', device=device, show_steps=True, skip_special_tokens=False)
-output = tokenizer.batch_decode(out[:, input_ids.shape[1]:], skip_special_tokens=True)
+out = generate(tl_model, input_ids, attention_mask, steps=128, gen_length=128, block_length=32, temperature=0., cfg_scale=0., remasking='low_confidence', device=device, show_steps=SHOW_STEPS, skip_special_tokens=SKIP_SPECIAL_TOKENS)
+output = tokenizer.batch_decode(out[:, input_ids.shape[1]:], skip_special_tokens=SKIP_SPECIAL_TOKENS)
+print("")
 for o in output:
     print(o)
     print('-' * 50)

@@ -16,7 +16,7 @@ def unpermute_rope(tensor):
     )
 
 def convert_llada_weights(hf_model, cfg: HookedTransformerConfig):
-    print(hf_model)
+    #print(hf_model)
     state_dict = {}
     base_model = hf_model.model.transformer
     

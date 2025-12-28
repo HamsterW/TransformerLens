@@ -73,7 +73,7 @@ def generate(model, prompt, attention_mask=None, steps=128, gen_length=128, bloc
 
     for num_block in range(num_blocks):
         if show_steps:
-            print(f"Block {num_block + 1}\n")
+            print(f"Block {num_block + 1}")
         block_mask_index = (x[:, prompt.shape[1] + num_block * block_length: prompt.shape[1] + (num_block + 1) * block_length:] == mask_id)
         num_transfer_tokens = get_num_transfer_tokens(block_mask_index, steps)
         for i in range(steps):
