@@ -42,7 +42,7 @@ def get_num_transfer_tokens(mask_index, steps):
 
 @ torch.no_grad()
 def generate(model, prompt, attention_mask=None, steps=128, gen_length=128, block_length=128, temperature=0.,
-             cfg_scale=0., remasking='low_confidence', mask_id=126336, logits_eos_inf=False, confidence_eos_eot_inf=False, device="cuda"):
+             cfg_scale=0., remasking='low_confidence', mask_id=126336, logits_eos_inf=False, confidence_eos_eot_inf=False, device="cuda", show_steps=False, skip_special_tokens=True):
     '''
     Args:
         model: Mask predictor.
@@ -72,10 +72,13 @@ def generate(model, prompt, attention_mask=None, steps=128, gen_length=128, bloc
     steps = steps // num_blocks
 
     for num_block in range(num_blocks):
+        if show_steps:
+            print(f"Block {num_block + 1}\n")
         block_mask_index = (x[:, prompt.shape[1] + num_block * block_length: prompt.shape[1] + (num_block + 1) * block_length:] == mask_id)
         num_transfer_tokens = get_num_transfer_tokens(block_mask_index, steps)
         for i in range(steps):
-            #print(model.tokenizer.batch_decode(x[:, prompt.shape[1]:], skip_special_tokens=True))
+            if show_steps:
+                print(f"Step {i + 1}: {model.tokenizer.batch_decode(x[:, prompt.shape[1]:], skip_special_tokens=skip_special_tokens)}")
             mask_index = (x == mask_id)
             if cfg_scale > 0.:
                 un_x = x.clone()

@@ -23,16 +23,6 @@ def convert_llada_weights(hf_model, cfg: HookedTransformerConfig):
     # --- Embeddings ---
     state_dict["embed.W_E"] = base_model.wte.weight
     
-    # NEW: Try to load Positional Embeddings (W_pos)
-    # Standard models (GPT-2) have this. LLaMA/LLaDA DOES NOT.
-    # We try to load it if it exists; otherwise, TL will use random initialization.
-    if hasattr(base_model, "wpe"):
-        print("Found W_pos (wpe), loading it...")
-        state_dict["pos_embed.W_pos"] = base_model.wpe.weight
-    else:
-        print("⚠️ Warning: No W_pos found in HF model (Normal for LLaMA/LLaDA).")
-        print("   TransformerLens will use random/zero positional embeddings.")
-    
     # --- Iterate Layers ---
     for l in range(cfg.n_layers):
         hf_block = base_model.blocks[l]
