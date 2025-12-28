@@ -266,6 +266,7 @@ OFFICIAL_MODEL_NAMES = [
     "google-t5/t5-large",
     "ai-forever/mGPT",
     "GSAI-ML/LLaDA-8B-Base",
+    "GSAI-ML/LLaDA-8B-Instruct",
 ]
 """Official model names for models on HuggingFace."""
 
@@ -723,6 +724,7 @@ MODEL_ALIASES = {
     "google-t5/t5-large": ["t5-large"],
     "ai-forever/mGPT": ["mGPT"],
     "GSAI-ML/LLaDA-8B-Base": ["llada-8b"],
+    "GSAI-ML/LLaDA-8B-Instruct": ["llada-8b-instruct"],
 }
 """Model aliases for models on HuggingFace."""
 

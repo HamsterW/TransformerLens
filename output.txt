@@ -1,5 +1,5 @@
 WARNING:root:float16 models may not work on CPU. Consider using a GPU or bfloat16.
-Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  4.06it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:01,  3.23it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:01<00:01,  2.85it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:01<00:00,  2.74it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:01<00:00,  2.69it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.94it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.93it/s]
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  3.67it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:01,  2.79it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:01<00:01,  2.35it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:01<00:00,  2.39it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:01<00:00,  2.45it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.76it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:02<00:00,  2.65it/s]
 LLaDAModelLM(
   (model): LLaDAModel(
     (transformer): ModuleDict(
@@ -26,9 +26,11 @@ LLaDAModelLM(
     )
   )
 )
+⚠️ Warning: No W_pos found in HF model (Normal for LLaMA/LLaDA).
+   TransformerLens will use random/zero positional embeddings.
 WARNING:root:With reduced precision, it is advised to use `from_pretrained_no_processing` instead of `from_pretrained`.
 WARNING:root:You are not using LayerNorm, so the writing weights can't be centered! Skipping
-Loaded pretrained model GSAI-ML/LLaDA-8B-Base into HookedTransformer
+Loaded pretrained model GSAI-ML/LLaDA-8B-Instruct into HookedTransformer
 HookedTransformer(
   (embed): Embed()
   (hook_embed): HookPoint()
@@ -108,7 +110,7 @@ HookedTransformerConfig:
  'init_weights': False,
  'initializer_range': 0.0125,
  'load_in_4bit': False,
- 'model_name': 'LLaDA-8B-Base',
+ 'model_name': 'LLaDA-8B-Instruct',
  'n_ctx': 8192,
  'n_devices': 1,
  'n_heads': 32,
@@ -130,7 +132,7 @@ HookedTransformerConfig:
  'scale_attn_by_inverse_layer_idx': False,
  'seed': None,
  'tie_word_embeddings': False,
- 'tokenizer_name': 'GSAI-ML/LLaDA-8B-Base',
+ 'tokenizer_name': 'GSAI-ML/LLaDA-8B-Instruct',
  'tokenizer_prepends_bos': False,
  'trust_remote_code': True,
  'ungroup_grouped_query_attention': False,
@@ -145,7 +147,136 @@ HookedTransformerConfig:
  'use_qk_norm': False,
  'use_split_qkv_input': False,
  'window_size': None}
-Starting Generation: 'The Capital of France is' + 10 masks
-Step 0/5: <|mdm_mask|> answer<|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|><|mdm_mask|> it<|mdm_mask|>
-
-Final Output: <|startoftext|>The Capital of France is Paris答案\n Yorkers right thought pronunciation to wrong,
+['']
+[' ']
+['Lily ']
+['Lily 2']
+['Lily 12']
+['Lily 12 hour']
+['Lily 12 kilometers hour']
+['Lily 12 kilometers per hour']
+['Lily 12 kilometers per hour for']
+['Lily 12 kilometers per hour for hours']
+['Lily 12 kilometers per hour for  hours']
+['Lily 12 kilometers per hour for 4 hours']
+['Lily can 12 kilometers per hour for 4 hours']
+['Lily can run 12 kilometers per hour for 4 hours']
+['Lily can run 12 kilometers per hour for 4 hours,']
+['Lily can run 12 kilometers per hour for 4 hours, so']
+['Lily can run 12 kilometers per hour for 4 hours, so she']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs 4']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs1 4']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs 1 4']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs 12 4']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs of 12 4']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a of 12 4']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a of 12 4 =']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a of 12 4 =8']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a of 12 4 = 8']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a of 12 4 = 48']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a of 12 4 = 48 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 4 = 48 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\n']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that,']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs  kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs  kilometers hour']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs  kilometers per hour']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining  hours']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours runs']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours she runs']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, she runs']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs  ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs  * ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs  *  =']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs  *  = ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs  * 4 = ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs 6 * 4 = ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs 6 * 4 = 2']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs of 6 * 4 = 2']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs total of 6 * 4 = 2']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 2']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 2 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers\n']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\n']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore,']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, run']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of  kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 4 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 +  kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 2 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 =  kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 7 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers in']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers in ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers in 8']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers in 8 hours']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers in 8 hours.']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, can run a total of 48 + 24 = 72 kilometers in 8 hours.\n']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\n']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is ']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 7']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 72']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 72']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 72']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 72']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 72']
+['Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.\nAfter that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.\nTherefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.\nThe final result is 72']
+Lily can run 12 kilometers per hour for 4 hours, so she runs a total of 12 * 4 = 48 kilometers.
+After that, she runs 6 kilometers per hour for the remaining 4 hours, so she runs a total of 6 * 4 = 24 kilometers.
+Therefore, Lily can run a total of 48 + 24 = 72 kilometers in 8 hours.
+The final result is 72
+--------------------------------------------------

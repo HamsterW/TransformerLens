@@ -20,10 +20,20 @@ def convert_llada_weights(hf_model, cfg: HookedTransformerConfig):
     state_dict = {}
     base_model = hf_model.model.transformer
     
-    # 1. Embeddings
+    # --- Embeddings ---
     state_dict["embed.W_E"] = base_model.wte.weight
     
-    # 2. Iterate Layers
+    # NEW: Try to load Positional Embeddings (W_pos)
+    # Standard models (GPT-2) have this. LLaMA/LLaDA DOES NOT.
+    # We try to load it if it exists; otherwise, TL will use random initialization.
+    if hasattr(base_model, "wpe"):
+        print("Found W_pos (wpe), loading it...")
+        state_dict["pos_embed.W_pos"] = base_model.wpe.weight
+    else:
+        print("⚠️ Warning: No W_pos found in HF model (Normal for LLaMA/LLaDA).")
+        print("   TransformerLens will use random/zero positional embeddings.")
+    
+    # --- Iterate Layers ---
     for l in range(cfg.n_layers):
         hf_block = base_model.blocks[l]
         prefix = f"blocks.{l}"
@@ -33,7 +43,7 @@ def convert_llada_weights(hf_model, cfg: HookedTransformerConfig):
         state_dict[f"{prefix}.ln2.w"] = hf_block.ff_norm.weight
 
         # --- Attention ---
-        # Helper to reshape HF [Heads*HeadDim, D_Model] -> TL [Heads, D_Model, HeadDim]
+        # Helper to reshape: [Heads*HeadDim, D_Model] -> [Heads, D_Model, HeadDim]
         def map_qkv(weight):
             return einops.rearrange(
                 weight, 
@@ -47,19 +57,16 @@ def convert_llada_weights(hf_model, cfg: HookedTransformerConfig):
         k = map_qkv(hf_block.k_proj.weight)
         v = map_qkv(hf_block.v_proj.weight)
 
-        # B. CRITICAL FIX: Un-permute RoPE for Q and K
-        # TransformerLens requires split halves for Rotary, HF gives interleaved pairs.
-        # We DO NOT touch V (V is not rotated).
-        q = unpermute_rope(q)
-        k = unpermute_rope(k)
+        # B. REMOVED: unpermute_rope 
+        # For standard attention, we load Q and K exactly as they are.
+        # q = unpermute_rope(q)  <-- DELETED
+        # k = unpermute_rope(k)  <-- DELETED
         
-        # C. Assign to State Dict
+        # C. Assign
         state_dict[f"{prefix}.attn.W_Q"] = q
         state_dict[f"{prefix}.attn.W_K"] = k
         state_dict[f"{prefix}.attn.W_V"] = v
         
-        # D. Output Projection
-        # HF: [D_Model, Heads*HeadDim] -> TL: [Heads, HeadDim, D_Model]
         state_dict[f"{prefix}.attn.W_O"] = einops.rearrange(
             hf_block.attn_out.weight, 
             "m (n h) -> n h m", 
@@ -67,20 +74,17 @@ def convert_llada_weights(hf_model, cfg: HookedTransformerConfig):
         )
 
         # --- MLP ---
-        # NOTE on LLaMA/LLaDA Mapping:
-        # LLaMA 'gate_proj' (or ff_proj) -> TL 'W_gate' (The one with SiLU)
-        # LLaMA 'up_proj'                -> TL 'W_in'   (The value projection)
-        # LLaMA 'down_proj' (or ff_out)  -> TL 'W_out'  (The output)
-        
-        state_dict[f"{prefix}.mlp.W_in"]   = hf_block.up_proj.weight.T   # Swapped from your version
-        state_dict[f"{prefix}.mlp.W_gate"] = hf_block.ff_proj.weight.T   # Swapped from your version
+        state_dict[f"{prefix}.mlp.W_in"]   = hf_block.up_proj.weight.T
+        state_dict[f"{prefix}.mlp.W_gate"] = hf_block.ff_proj.weight.T
         state_dict[f"{prefix}.mlp.W_out"]  = hf_block.ff_out.weight.T
 
-    # 3. Final Norm & Unembed
+    # --- Final Norm & Unembed ---
     state_dict["ln_final.w"] = base_model.ln_f.weight
     
-    # LLaDA output head is usually at the end of the transformer or passed separately
-    # Assuming base_model.ff_out is the LM Head:
-    state_dict["unembed.W_U"] = base_model.ff_out.weight.T
+    # Check for lm_head vs ff_out
+    if hasattr(hf_model, "lm_head"):
+        state_dict["unembed.W_U"] = hf_model.lm_head.weight.T
+    elif hasattr(base_model, "ff_out"):
+        state_dict["unembed.W_U"] = base_model.ff_out.weight.T
 
     return state_dict
